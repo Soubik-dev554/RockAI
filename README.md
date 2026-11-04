@@ -16,14 +16,14 @@ RockAI is a full-stack AI chatbot application built using the MERN stack and Ope
 
 ## 🛠️ Tech Stack
 
-**Frontend**
+### Frontend
 
 * React.js
 * Vite
 * JavaScript
 * CSS
 
-**Backend**
+### Backend
 
 * Node.js
 * Express.js
@@ -31,7 +31,7 @@ RockAI is a full-stack AI chatbot application built using the MERN stack and Ope
 * Mongoose
 * JWT Authentication
 
-**External Services**
+### External Services
 
 * OpenAI API
 * Brevo Email API
@@ -129,9 +129,9 @@ npm run dev
 
 ## 👨‍💻 Developer
 
-**Soubik Jana**
+### Soubik Jana
 
-GitHub: https://github.com/Soubik-dev554
+GitHub: <https://github.com/Soubik-dev554>
 
 ---
 

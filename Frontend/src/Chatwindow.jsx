@@ -5,11 +5,13 @@ import { MyContext } from "./MyContext";
 import { ScaleLoader } from "react-spinners";
 import Chat from "./Chat.jsx"
 import UserProfile from "./Components/Userprofile.jsx";
-const token = localStorage.getItem("token");
+import useAuth from "./context/useAuth.jsx";
+// const token = localStorage.getItem("token");
 
 
 
 function Chatwindow() {
+    const{token} = useAuth();
     const {
         prompt,
         setPrompt,
