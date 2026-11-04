@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    color: #ececec;
+    font-family: Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.app {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #212121;
+}
+
+/* Mobile layout */
+@media (max-width: 767px) {
+    .app {
+        width: 100%;
+        min-width: 0;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+    }
+}
+
+/* Mobile sidebar drawer */
+@media (max-width: 767px) {
+    .app {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .app > .Sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        width: min(280px, 85vw);
+        min-width: 0;
+        height: 100vh;
+        height: 100dvh;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+
+    .app > .Sidebar.open {
+        transform: translateX(0);
+    }
+
+    .app > .chatWindow {
+        width: 100%;
+        min-width: 0;
+        height: 100%;
+        height: 100dvh;
+    }
+
+    .mobile-sidebar-close {
+        display: flex;
+        position: absolute;
+        top: 23px;
+        right: 18px;
+        z-index: 2;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .navbar-left {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .navbar {
+        padding: 0 10px;
+    }
+
+    .chatInput {
+        padding: 10px 12px 14px;
+    }
+}
+
+/* Keep mobile controls hidden on desktop */
+@media (min-width: 768px) {
+    .mobile-menu-btn,
+    .mobile-sidebar-close {
+        display: none;
+    }
+}

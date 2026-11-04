@@ -1,0 +1,270 @@
+/* =========================
+   SIDEBAR
+========================= */
+
+.Sidebar {
+    width: 270px;
+    min-width: 270px;
+    height: 100vh;
+    height: 100dvh;
+    background: #080808;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 14px;
+    box-sizing: border-box;
+    border-right: 1px solid #222;
+}
+
+
+/* =========================
+   TOP BUTTON
+========================= */
+
+.button {
+    width: 100%;
+    max-width: 240px;
+    min-width: 0;
+    height: 54px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* RockAI logo */
+.logo {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* New chat icon */
+.new-chat-icon {
+    width: 21px;
+    height: 21px;
+    color: white;
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   HISTORY CONTAINER
+========================= */
+
+.Sidebar-history {
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+.history {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 20px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* Individual history item */
+.history li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    color: #d1d1d1;
+    font-size: 14px;
+
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Hover effect */
+.history li:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* =========================
+   HISTORY TITLE
+========================= */
+
+.history-title {
+    flex: 1;
+    min-width: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   DELETE CHAT BUTTON
+========================= */
+
+.delete-chat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 28px;
+    height: 28px;
+
+    padding: 5px;
+
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+
+    color: #999;
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+/* Show delete icon when hovering over history item */
+.history-item:hover .delete-chat-btn {
+    opacity: 1;
+}
+
+/* Delete button hover */
+.delete-chat-btn:hover {
+    color: #ff4d4f;
+    background: #343434;
+}
+
+/* Keep the icon visible when keyboard-focused */
+.delete-chat-btn:focus-visible {
+    opacity: 1;
+    outline: 1px solid #ff4d4f;
+    outline-offset: 2px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.sign {
+    padding: 10px;
+    margin: 10px;
+    font-size: 15px;
+    text-align: center;
+    border-top: solid 0.5px rgba(255, 255, 255, 0.5);
+}
+
+/* =========================
+   SIDEBAR SCROLLBAR
+========================= */
+
+.history {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #444 #080808;
+}
+
+/* Chrome, Edge, and Safari */
+.history::-webkit-scrollbar {
+    width: 8px;
+}
+
+.history::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+.history::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+.history::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+.history::-webkit-scrollbar-corner {
+    background: #080808;
+}
+
+/* Selected conversation */
+.history li.history-item.active {
+    background-color: #333333;
+    color: white;
+}
+
+/* Hover effect */
+.history li.history-item:hover {
+    background-color: #222222;
+}
+
+/* Selected conversation on hover */
+.history li.history-item.active:hover {
+    background-color: #404040;
+}
+
+
+
+/* Mobile sidebar close button */
+.mobile-sidebar-close {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .Sidebar {
+        width: min(280px, 85vw);
+        min-width: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    /* Reserve space for the close button */
+    .Sidebar .button {
+        width: 100%;
+        max-width: none;
+        padding-right: 48px;
+    }
+
+    /* Position the X independently */
+    .Sidebar .mobile-sidebar-close {
+        display: flex;
+        position: absolute;
+        top: 23px;
+        right: 18px;
+        z-index: 10;
+        width: 32px;
+        height: 32px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        cursor: pointer;
+    }
+}
+
