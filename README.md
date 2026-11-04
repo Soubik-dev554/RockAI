@@ -39,15 +39,12 @@ RockAI is a full-stack AI chatbot application built using the MERN stack and Ope
 
 📸 Application Screenshots
 
-<p align="center">
-  <img src="Screenshots/signin.png" width="400"/>
-  <img src="Screenshots/signup.png" width="400"/>
-</p>
+(Screenshots/signin.png)
+(Screenshots/signup.png)
 
-<p align="center">
-  <img src="Screenshots/Home.png" width="400"/>
-  <img src="Screenshots/Chat&Sidebar.png" width="400"/>
-</p>
+(Screenshots/Home.png)
+(Screenshots/Chat&Sidebar.png)
+
 ## 📁 Project Structure
 
 ```text
