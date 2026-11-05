@@ -40,7 +40,7 @@ function Login() {
 
         try {
             const response = await fetch(
-                "http://https://15-135-87-77.sslip.io/api/login",
+                "https://15-135-87-77.sslip.io/api/login",
                 {
                     method: "POST",
                     headers: {

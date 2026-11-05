@@ -69,7 +69,7 @@ const handleSubmit = async (e) => {
 
     try {
         const response = await fetch(
-            "http://https://15-135-87-77.sslip.io/api/register",
+            "https://15-135-87-77.sslip.io/api/register",
             {
                 method: "POST",
                 headers: {

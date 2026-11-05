@@ -62,7 +62,7 @@ function Chatwindow() {
             };
 
             const response = await fetch(
-                "http://https://15-135-87-77.sslip.io/api/chat",
+                "https://15-135-87-77.sslip.io/api/chat",
                 options
             );
 
