@@ -33,7 +33,7 @@ function Sidebar() {
     const getAllThreads = useCallback(async () => {
         try {
             const response = await fetch(
-                "http://localhost:8080/api/thread",
+                "http://https://15-135-87-77.sslip.io/api/thread",
                 {
                     headers: getAuthHeaders()
                 }
@@ -90,7 +90,7 @@ function Sidebar() {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/api/thread/${newThreadId}`,
+                `http://https://15-135-87-77.sslip.io/api/thread/${newThreadId}`,
                 {
                     headers: getAuthHeaders()
                 }
@@ -126,7 +126,7 @@ function Sidebar() {
     const deleteThread = async (threadId) => {
         try {
             const response = await fetch(
-                `http://localhost:8080/api/thread/${threadId}`,
+                `http://https://15-135-87-77.sslip.io/api/thread/${threadId}`,
                 {
                     method: "DELETE",
                     headers: getAuthHeaders()

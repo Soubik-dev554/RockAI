@@ -14,8 +14,11 @@ const PORT = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
+app.use(cors({
+    origin: "https://main.dppbhlekone08.amplifyapp.com",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+}));
 // Initialize Passport
 app.use(passport.initialize());
 

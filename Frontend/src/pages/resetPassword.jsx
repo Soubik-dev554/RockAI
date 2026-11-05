@@ -11,7 +11,7 @@ import {
     CheckCircle2,
 } from "lucide-react";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "http://https://15-135-87-77.sslip.io";
 
 function ResetPassword() {
     const { token } = useParams();
