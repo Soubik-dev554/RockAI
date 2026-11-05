@@ -8,7 +8,7 @@ import {
     ArrowLeft,
 } from "lucide-react";
 
-const API_URL = "https://15-135-87-77.sslip.io";
+const API_URL = "https://3-104-229-106.sslip.io";
 
 const SUCCESS_MESSAGE =
     "If an account exists for that email, password-reset instructions will be sent. Please check your inbox and spam folder.";
