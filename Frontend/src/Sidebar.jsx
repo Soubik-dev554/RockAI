@@ -4,6 +4,7 @@ import { SquarePen, Trash2, X } from "lucide-react";
 import { useContext, useEffect, useCallback } from "react";
 import { MyContext } from "./MyContext";
 import { v1 as uuidv1 } from "uuid";
+import { apiRequest } from "./services/api";
 
 function Sidebar() {
     const {
@@ -20,34 +21,11 @@ function Sidebar() {
         setSidebarOpen
     } = useContext(MyContext);
 
-    // Get the JWT from localStorage and prepare the request headers.
-    const getAuthHeaders = () => {
-        const token = localStorage.getItem("token");
-
-        return token
-            ? { Authorization: `Bearer ${token}` }
-            : {};
-    };
-
     // Fetch all conversations belonging to the authenticated user.
     const getAllThreads = useCallback(async () => {
         try {
-            const response = await fetch(
-                "https://3-104-229-106.sslip.io/api/thread",
-                {
-                    headers: getAuthHeaders()
-                }
-            );
+            const res = await apiRequest("/thread");
 
-            const res = await response.json();
-
-            if (!response.ok) {
-                throw new Error(
-                    res.message || "Failed to fetch conversations"
-                );
-            }
-
-            // Accept an array directly or an object containing threads.
             const threads = Array.isArray(res)
                 ? res
                 : res.threads;
@@ -62,6 +40,7 @@ function Sidebar() {
             }));
 
             setAllThreads(filterData);
+
         } catch (err) {
             console.error("Error fetching threads:", err.message);
         }
@@ -80,7 +59,6 @@ function Sidebar() {
         setCurrThreadId(uuidv1());
         setPrevChats([]);
         setSidebarOpen(false);
-
     };
 
     // Open an existing conversation.
@@ -89,22 +67,8 @@ function Sidebar() {
         setAnimatedMessage(null);
 
         try {
-            const response = await fetch(
-                `https://3-104-229-106.sslip.io/api/thread/${newThreadId}`,
-                {
-                    headers: getAuthHeaders()
-                }
-            );
+            const res = await apiRequest(`/thread/${newThreadId}`);
 
-            const res = await response.json();
-
-            if (!response.ok) {
-                throw new Error(
-                    res.message || "Failed to load conversation"
-                );
-            }
-
-            // Support either an array or an object containing messages.
             const messages = Array.isArray(res)
                 ? res
                 : res.messages;
@@ -117,6 +81,7 @@ function Sidebar() {
             setNewChat(false);
             setReply(null);
             setSidebarOpen(false);
+
         } catch (err) {
             console.error("Error loading thread:", err.message);
         }
@@ -125,21 +90,9 @@ function Sidebar() {
     // Delete a conversation.
     const deleteThread = async (threadId) => {
         try {
-            const response = await fetch(
-                `https://3-104-229-106.sslip.io/api/thread/${threadId}`,
-                {
-                    method: "DELETE",
-                    headers: getAuthHeaders()
-                }
-            );
-
-            const res = await response.json();
-
-            if (!response.ok) {
-                throw new Error(
-                    res.message || "Failed to delete conversation"
-                );
-            }
+            await apiRequest(`/thread/${threadId}`, {
+                method: "DELETE"
+            });
 
             setAllThreads((prev) =>
                 prev.filter((thread) => thread.threadId !== threadId)
@@ -148,6 +101,7 @@ function Sidebar() {
             if (threadId === currThreadId) {
                 createNewChat();
             }
+
         } catch (err) {
             console.error("Error deleting thread:", err.message);
         }
@@ -155,6 +109,7 @@ function Sidebar() {
 
     return (
         <section className={`Sidebar ${sidebarOpen ? "open" : ""}`}>
+
             <button
                 className="mobile-sidebar-close"
                 onClick={() => setSidebarOpen(false)}
@@ -162,6 +117,7 @@ function Sidebar() {
             >
                 <X size={22} />
             </button>
+
             <button
                 className="button"
                 onClick={createNewChat}
@@ -171,6 +127,7 @@ function Sidebar() {
                     alt="AI Logo"
                     className="logo"
                 />
+
                 <SquarePen
                     className="new-chat-icon"
                     size={21}
@@ -182,8 +139,8 @@ function Sidebar() {
                     <li
                         key={thread.threadId}
                         className={`history-item ${currThreadId === thread.threadId
-                            ? "active"
-                            : ""
+                                ? "active"
+                                : ""
                             }`}
                     >
                         <span
@@ -212,6 +169,7 @@ function Sidebar() {
             <div className="sign">
                 <p>By SoubikJana &hearts;</p>
             </div>
+
         </section>
     );
 }

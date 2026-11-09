@@ -6,12 +6,13 @@ import { ScaleLoader } from "react-spinners";
 import Chat from "./Chat.jsx"
 import UserProfile from "./Components/Userprofile.jsx";
 import useAuth from "./context/useAuth.jsx";
+import { apiRequest } from "./services/api";
 // const token = localStorage.getItem("token");
 
 
 
 function Chatwindow() {
-    const{token} = useAuth();
+    const { token } = useAuth();
     const {
         prompt,
         setPrompt,
@@ -49,32 +50,13 @@ function Chatwindow() {
         setLoading(true);
 
         try {
-            const options = {
+            const data = await apiRequest("/chat", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
                 body: JSON.stringify({
                     message: userMessage,
                     threadId: currThreadId,
                 }),
-            };
-
-            const response = await fetch(
-                "https://3-104-229-106.sslip.io/api/chat",
-                options
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(
-                    typeof data === "object"
-                        ? data.error || "Request failed"
-                        : "Request failed"
-                );
-            }
+            });
 
             // Handle both string and object responses
             const assistantReply =
@@ -84,7 +66,7 @@ function Chatwindow() {
                 throw new Error("Invalid AI response format");
             }
 
-            console.log("AI reply:", assistantReply);
+            // console.log("AI reply:", assistantReply);
 
             // Display the AI response only once
             const assistantMessage = {

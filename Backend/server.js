@@ -14,8 +14,20 @@ const PORT = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://main.dppbhlekone08.amplifyapp.com"
+];
+
 app.use(cors({
-    origin: "https://main.dppbhlekone08.amplifyapp.com",
+    origin: (origin, callback) => {
+        // Allow requests without an Origin header.
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
 }));

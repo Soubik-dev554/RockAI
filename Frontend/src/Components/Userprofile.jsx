@@ -28,8 +28,8 @@ export default function UserProfile() {
   }, []);
 
   const handleLogout = () => {
-    logout();
     setIsOpen(false);
+    logout();
     navigate("/login", { replace: true });
   };
 

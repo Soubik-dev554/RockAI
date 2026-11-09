@@ -1,14 +1,22 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Bot, Eye, EyeOff, LoaderCircle, LockKeyhole, Mail } from "lucide-react";
+import {
+    Bot,
+    Eye,
+    EyeOff,
+    LoaderCircle,
+    LockKeyhole,
+    Mail
+} from "lucide-react";
 import useAuth from "../context/useAuth.jsx";
+import { apiRequest } from "../services/api";
 
 function Login() {
     const location = useLocation();
     const successMessage = location.state?.message;
+
     const navigate = useNavigate();
     const { login } = useAuth();
-
 
     const [formData, setFormData] = useState({
         email: "",
@@ -39,52 +47,47 @@ function Login() {
         setLoading(true);
 
         try {
-            const response = await fetch(
-                "https://3-104-229-106.sslip.io/api/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: formData.email.trim(),
-                        password: formData.password,
-                    }),
-                }
-            );
+            const data = await apiRequest("/login", {
+                method: "POST",
+                requireAuth: false,
+                body: JSON.stringify({
+                    email: formData.email.trim(),
+                    password: formData.password,
+                }),
+            });
 
-            const data = await response.json();
-
-            if (!response.ok) {
+            if (!data.token || !data.user) {
                 throw new Error(
-                    data.message || "Unable to log in. Please try again."
+                    "Invalid response received from the server."
                 );
             }
 
-            if (!data.token || !data.user) {
-                throw new Error("Invalid response received from the server.");
-            }
-
-            // Store the authenticated user and JWT.
+            // Store authenticated user and JWT.
             login(data.user, data.token);
 
-            // Return to the chatbot.
+            // Navigate to chatbot.
             navigate("/", { replace: true });
+
         } catch (err) {
+            console.error("Login error:", err);
+
             setError(
-                err.message === "Failed to fetch"
-                    ? "Unable to connect to the server. Please try again."
-                    : err.message || "Something went wrong."
+                err.message || "Something went wrong."
             );
+
         } finally {
             setLoading(false);
         }
     };
 
     return (
-<main className="flex min-h-screen items-center justify-center bg-[#171717] px-3 py-6 text-white sm:px-4 sm:py-8">            <section className="w-full max-w-md min-w-0 rounded-2xl border border-white/10 bg-[#222222] p-5 shadow-2xl sm:p-8">
+        <main className="flex min-h-screen items-center justify-center bg-[#171717] px-3 py-6 text-white sm:px-4 sm:py-8">
+
+            <section className="w-full max-w-md min-w-0 rounded-2xl border border-white/10 bg-[#222222] p-5 shadow-2xl sm:p-8">
+
                 {/* Brand */}
                 <div className="mb-8 text-center">
+
                     <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 shadow-lg shadow-blue-600/20">
                         <Bot size={30} aria-hidden="true" />
                     </div>
@@ -96,8 +99,10 @@ function Login() {
                     <p className="mt-3 text-sm text-gray-400">
                         Sign in to continue your AI conversations.
                     </p>
+
                 </div>
 
+                {/* Success message */}
                 {successMessage && (
                     <div
                         role="status"
@@ -117,9 +122,12 @@ function Login() {
                     </div>
                 )}
 
-                {/* Form */}
+                {/* Login form */}
                 <form onSubmit={handleSubmit} className="space-y-5">
+
+                    {/* Email */}
                     <div>
+
                         <label
                             htmlFor="email"
                             className="mb-2 block text-sm font-medium text-gray-200"
@@ -128,6 +136,7 @@ function Login() {
                         </label>
 
                         <div className="relative">
+
                             <Mail
                                 size={18}
                                 aria-hidden="true"
@@ -145,10 +154,14 @@ function Login() {
                                 required
                                 className="w-full rounded-lg border border-white/10 bg-[#191919] py-3 pl-10 pr-4 text-white outline-none transition placeholder:text-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                             />
+
                         </div>
+
                     </div>
 
+                    {/* Password */}
                     <div>
+
                         <label
                             htmlFor="password"
                             className="mb-2 block text-sm font-medium text-gray-200"
@@ -157,6 +170,7 @@ function Login() {
                         </label>
 
                         <div className="relative">
+
                             <LockKeyhole
                                 size={18}
                                 aria-hidden="true"
@@ -174,6 +188,7 @@ function Login() {
                                 required
                                 className="w-full rounded-lg border border-white/10 bg-[#191919] py-3 pl-10 pr-12 text-white outline-none transition placeholder:text-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                             />
+
                             <button
                                 type="button"
                                 onClick={() => setShowPassword((prev) => !prev)}
@@ -187,24 +202,29 @@ function Login() {
                                     <Eye size={18} aria-hidden="true" />
                                 )}
                             </button>
+
                         </div>
 
                         <div className="mt-2 text-right">
+
                             <Link
                                 to="/forgot-password"
                                 className="text-sm text-blue-400 transition hover:text-blue-300"
                             >
                                 Forgot Password?
                             </Link>
+
                         </div>
 
                     </div>
 
+                    {/* Submit button */}
                     <button
                         type="submit"
                         disabled={loading}
                         className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-[#222222] disabled:cursor-not-allowed disabled:opacity-60"
                     >
+
                         {loading && (
                             <LoaderCircle
                                 size={18}
@@ -214,28 +234,33 @@ function Login() {
                         )}
 
                         {loading ? "Signing in..." : "Sign In"}
+
                     </button>
+
                 </form>
 
                 {/* Registration */}
                 <p className="mt-7 text-center text-sm text-gray-400">
+
                     Don't have an account?{" "}
+
                     <Link
                         to="/register"
                         className="font-medium text-blue-400 transition hover:text-blue-300"
                     >
                         Create an account
                     </Link>
+
                 </p>
 
                 <p className="mt-6 text-center text-xs text-gray-500">
                     Your AI conversations, all in one place.
                 </p>
+
             </section>
+
         </main>
     );
-
-
 }
 
 export default Login;
