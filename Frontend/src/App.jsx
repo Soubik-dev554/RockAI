@@ -11,6 +11,7 @@ import Register from './pages/Register.jsx';
 import ForgotPassword from './pages/forgotPassword.jsx';
 import useAuth from './context/useAuth.jsx';
 import ResetPassword from './pages/resetPassword.jsx';
+import VoiceMode from './pages/VoiceMode.jsx';
 
 function ChatApp() {
 const [prompt, setPrompt] = useState("");
@@ -74,6 +75,11 @@ element={token ? <Navigate to="/" replace /> : <Login />}
   <Route path="/reset-password/:token"
   element= {<ResetPassword/>} 
   />
+
+  <Route
+    path="/voice"
+    element={token ? <VoiceMode /> : <Navigate to="/login" replace />}
+/>
 
   <Route
     path="/"

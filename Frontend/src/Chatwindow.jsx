@@ -1,5 +1,5 @@
 import "./Chatwindow.css";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, Menu, Mic } from "lucide-react";
 import { useContext, useState, useEffect, useRef, useCallback } from "react";
 import { MyContext } from "./MyContext";
 import { ScaleLoader } from "react-spinners";
@@ -7,11 +7,13 @@ import Chat from "./Chat.jsx"
 import UserProfile from "./Components/Userprofile.jsx";
 import useAuth from "./context/useAuth.jsx";
 import { apiRequest } from "./services/api";
+import { useNavigate } from "react-router-dom";
 // const token = localStorage.getItem("token");
 
 
 
 function Chatwindow() {
+    const navigate = useNavigate();
     const { token } = useAuth();
     const {
         prompt,
@@ -111,10 +113,10 @@ function Chatwindow() {
                         <Menu size={22} />
                     </button>
 
-                    <button className="brand-btn" type="button">
+                    {/* <button className="brand-btn" type="button">
                         <span>RockAI</span>
                         <ChevronDown size={18} className="drop-down" />
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="user-icon" aria-label="User profile">
@@ -149,7 +151,24 @@ function Chatwindow() {
 
                     </input>
 
-                    <button id="submit" type="button" aria-label="Send prompt" onClick={getReply}>
+                    {/* Voice Mode Button */}
+                    <button
+                        type="button"
+                        aria-label="Open Voice Mode"
+                        title="Voice Mode"
+                        onClick={() => navigate("/voice")}
+                        className="w-10 h-10 flex items-center justify-center rounded-full bg-black/40 text-white hover:bg-[#858484] transition-all duration-200 cursor-pointer"                    >
+                        <Mic size={19} strokeWidth={2} />
+                    </button>
+
+                    {/* Send Button */}
+                    <button
+                        id="submit"
+                        type="button"
+                        aria-label="Send prompt"
+                        onClick={getReply}
+                        className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-200"
+                    >
                         <i className="fa-solid fa-arrow-up"></i>
                     </button>
                 </div>
