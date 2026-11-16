@@ -7,6 +7,7 @@ RockAI provides an interactive AI experience with user authentication, persisten
 ## ✨ Features
 
 ### 1. AI-Powered Chat
+
 - AI-powered text conversations using OpenAI API.
 - Interactive conversational interface.
 - Create and manage multiple conversations.
@@ -15,6 +16,7 @@ RockAI provides an interactive AI experience with user authentication, persisten
 - Thread-based conversation management.
 
 ### 2. Gemini Live Voice Mode
+
 - Real-time voice conversations powered by Google Gemini Live API.
 - Speech input and AI-generated audio responses.
 - Live conversation transcription.
@@ -25,24 +27,28 @@ RockAI provides an interactive AI experience with user authentication, persisten
 - Dedicated Voice Mode interface.
 
 ### 3. Smart Location Services
+
 - Retrieves the user's current location using browser geolocation.
 - Reverse geocoding to identify the approximate city and region.
 - Provides location information through voice interaction.
 - Uses OpenStreetMap Nominatim for reverse geocoding.
 
 ### 4. Real-Time Weather Information
+
 - Retrieves current weather based on the user's location.
 - Provides weather information for a specific city.
 - Weather information through Voice Mode.
 - Powered by Open-Meteo API.
 
 ### 5. Latest News Updates
+
 - Retrieves the latest news based on requested topics.
 - Supports topic-based news searches.
 - Provides news updates through Gemini Live function calling.
 - Integrated with NewsAPI.
 
 ### 6. Intelligent Function Calling
+
 RockAI can interact with external services through Gemini Live function calling.
 
 Available functions:
@@ -55,6 +61,7 @@ Available functions:
 These functions allow RockAI to retrieve external information instead of relying only on the AI model's existing knowledge.
 
 ### 7. User Authentication & Profile
+
 - User registration and login.
 - JWT-based authentication.
 - Protected backend routes.
@@ -63,6 +70,7 @@ These functions allow RockAI to retrieve external information instead of relying
 - Email integration using Brevo.
 
 ### 8. Modern User Interface
+
 - Responsive chat interface.
 - Dedicated Voice Mode interface.
 - Sidebar navigation.
@@ -73,6 +81,7 @@ These functions allow RockAI to retrieve external information instead of relying
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - React.js
 - Vite
 - JavaScript
@@ -81,6 +90,7 @@ These functions allow RockAI to retrieve external information instead of relying
 - Lucide React
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB
@@ -88,6 +98,7 @@ These functions allow RockAI to retrieve external information instead of relying
 - JWT Authentication
 
 ### AI & External Services
+
 - OpenAI API – AI-powered text conversations.
 - Google Gemini Live API – Real-time voice conversations.
 - NewsAPI – Latest news updates.
@@ -96,6 +107,7 @@ These functions allow RockAI to retrieve external information instead of relying
 - Brevo Email API – Password recovery emails.
 
 ### Development Tools
+
 - Git
 - GitHub
 - VS Code
@@ -103,21 +115,27 @@ These functions allow RockAI to retrieve external information instead of relying
 ## 📸 Application Screenshots
 
 ### 1. Sign In Page
+
 ![Sign In](Screenshots/Signin.png)
 
 ### 2. Registration Page
+
 ![Registration](Screenshots/Signup.png)
 
 ### 3. Home Page
-![Home Page](Screenshots/home.png)
+
+![Home Page](Screenshots/Home.png)
 
 ### 4. AI Chat Interface & Sidebar
+
 ![Chat Interface](Screenshots/Chat&Sidebar.png)
 
 ## 5. Voice Assistent Interface
+
 ![voiceAssistent](Screenshots/voiceAssistent.png)
 
-## 6. Chat History 
+## 6. Chat History
+
 ![chatHistory](Screenshots/chatHistory.png)
 
 ## 📁 Project Structure
